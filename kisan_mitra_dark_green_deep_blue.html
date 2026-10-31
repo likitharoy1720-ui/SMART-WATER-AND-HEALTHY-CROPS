@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kisan Mitra | Smart Irrigation & Water Quality</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================================
+   KISAN MITRA - Professional Agricultural System Stylesheet
+   Designed to match the reference layout exactly (Light Theme default + Dark Mode)
+   ========================================================================== */
+:root {
+  --bg-app: #f4f7f5;
+  --bg-card: #ffffff;
+  --bg-subtle: #f8faf9;
+  --border-light: #e5ece7;
+  --border-card: #e2e8f0;
+  
+  --primary-green: #15803d;
+  --primary-light: #16a34a;
+  --primary-soft: #dcfce7;
+  --primary-hover: #166534;
+  
+  --accent-blue: #0284c7;
+  --accent-blue-soft: #e0f2fe;
+  --accent-amber: #d97706;
+  --accent-amber-soft: #fef3c7;
+  --accent-red: #dc2626;
+  --accent-red-soft: #fee2e2;
+  
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --text-dim: #94a3b8;
+  --text-brand: #14532d;
+  
+  --footer-bg: #143223;
+  --footer-text: #dcfce7;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+  --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  --font-mono: 'Consolas', 'Courier New', monospace;
+}
+
+/* Dark Theme Overrides */
+body.dark-theme {
+  --bg-app: #0d1612;
+  --bg-card: #15241d;
+  --bg-subtle: #1a2d24;
+  --border-light: #233b2f;
+  --border-card: #274436;
+  --text-dark: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --text-brand: #4ade80;
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-dark);
+  font-family: var(--font-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ==========================================================================
+   Top Navigation Bar
+   ========================================================================== */
+.navbar {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-light);
+  padding: 10px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.brand-logo-svg {
+  width: 36px;
+  height: 36px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-brand);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  color: var(--primary-green);
+  background-color: var(--bg-subtle);
+}
+
+.nav-item.active {
+  color: var(--primary-green);
+  background-color: var(--primary-soft);
+}
+
+body.dark-theme .nav-item.active {
+  background-color: rgba(22, 163, 74, 0.2);
+  color: #4ade80;
+}
+
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tool-select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  color: var(--text-dark);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-icon {
+  background: transparent;
+  border: 1px solid var(--border-card);
+  color: var(--text-dark);
+  border-radius: 6px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+  background-color: var(--bg-subtle);
+}
+
+.btn-usb {
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-usb:hover {
+  background: var(--primary-hover);
+}
+
+/* ==========================================================================
+   Hero Banner (Exact match to reference photo)
+   ========================================================================== */
+.hero-wrapper {
+  max-width: 1360px;
+  margin: 16px auto 0;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.hero-banner {
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36px 48px;
+  background: 
+    linear-gradient(90deg, rgba(16, 44, 27, 0.95) 0%, rgba(16, 44, 27, 0.82) 48%, rgba(16, 44, 27, 0.3) 100%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="%2387ceeb"/><stop offset="60%" stop-color="%23e0f2fe"/><stop offset="100%" stop-color="%23dcfce7"/></linearGradient><linearGradient id="crop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="%234ade80"/><stop offset="100%" stop-color="%23166534"/></linearGradient></defs><rect width="1200" height="400" fill="url(%23sky)"/><circle cx="1050" cy="90" r="45" fill="%23fef08a" opacity="0.8"/><rect y="220" width="1200" height="180" fill="url(%23crop)"/><path d="M0,230 Q300,200 600,230 T1200,225 L1200,400 L0,400 Z" fill="%2315803d" opacity="0.6"/><path d="M700,240 C850,210 1000,220 1200,235 L1200,400 L700,400 Z" fill="%23166534"/><g opacity="0.4"><circle cx="850" cy="220" r="18" fill="white"/><circle cx="950" cy="210" r="22" fill="white"/><circle cx="1050" cy="215" r="25" fill="white"/></g></svg>');
+  background-size: cover;
+  background-position: center;
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+
+.hero-content {
+  max-width: 540px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-subtitle {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  margin-bottom: 22px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.hero-btn {
+  background-color: #16a34a;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.4);
+}
+
+.hero-btn:hover {
+  background-color: #22c55e;
+  transform: translateY(-1px);
+}
+
+.hero-farmer-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  z-index: 2;
+}
+
+.hero-quote {
+  font-style: italic;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.35;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 8px;
+}
+
+.hero-quote-sub {
+  font-size: 0.75rem;
+  color: #86efac;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Main Container
+   ========================================================================== */
+.main-container {
+  max-width: 1360px;
+  margin: 22px auto 40px;
+  padding: 0 20px;
+  width: 100%;
+  flex-grow: 1;
+}
+
+/* Section Header (Sensor Readings) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-icon {
+  font-size: 1.25rem;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.section-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.device-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  box-shadow: var(--shadow-sm);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+/* ==========================================================================
+   Grid Row 1: 4 Sensor Cards (Exact Match to Reference Photo)
+   ========================================================================== */
+.sensor-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1080px) {
+  .sensor-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .sensor-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.card-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.icon-blue { background: #e0f2fe; color: #0284c7; }
+.icon-amber { background: #fef3c7; color: #d97706; }
+.icon-cyan { background: #e0f2fe; color: #0891b2; }
+.icon-green { background: #dcfce7; color: #16a34a; }
+
+.card-header-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card-main-val {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.val-large {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+}
+
+.val-unit {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.pill-good {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.pill-acceptable {
+  background-color: #fef3c7;
+  color: #b45309;
+}
+
+.pill-normal {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.pill-danger {
+  background-color: #fee2e2;
+  color: #b91c1c;
+}
+
+.card-subtext {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Grid Row 2: 4 Analytics & Tank Cards (Exact Match to Reference Photo)
+   ========================================================================== */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1080px) {
+  .analytics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.analytics-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.chart-wrap {
+  width: 100%;
+  height: 140px;
+  position: relative;
+}
+
+.chart-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Tank Level Donut + Canister Layout (Card 7 in photo) */
+.tank-visual-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  flex-grow: 1;
+}
+
+.donut-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.donut-svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.donut-circle-bg {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 8;
+}
+
+body.dark-theme .donut-circle-bg {
+  stroke: #274436;
+}
+
+.donut-circle-progress {
+  fill: none;
+  stroke: #0284c7;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.5s ease;
+}
+
+.donut-text {
+  position: absolute;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.1;
+}
+
+.donut-text span {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.tank-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tank-detail-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.tank-detail-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* 3D Blue Water Canister Graphic */
+.canister-box {
+  width: 48px;
+  height: 70px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.canister-cap {
+  width: 18px;
+  height: 8px;
+  background: #0284c7;
+  border-radius: 3px 3px 0 0;
+}
+
+.canister-body {
+  width: 46px;
+  height: 60px;
+  background: #bae6fd;
+  border: 2px solid #0284c7;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.canister-water {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 68%;
+  background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+  transition: height 0.4s ease;
+}
+
+.canister-rib {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.4);
+}
+.canister-rib.r1 { top: 18px; }
+.canister-rib.r2 { top: 36px; }
+
+/* Irrigation Recommendation Card (Card 8 in photo) */
+.rec-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.rec-sprout-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dcfce7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.rec-text-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.rec-text-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.btn-rec-guide {
+  margin-top: auto;
+  background-color: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-rec-guide:hover {
+  background-color: var(--primary-hover);
+}
+
+/* ==========================================================================
+   Interactive Tabs Content Sections
+   ========================================================================== */
+.tab-section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Extended Hardware Section */
+.hw-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.hw-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.hw-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.hw-icon {
+  font-size: 1.4rem;
+}
+
+.hw-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.hw-pin-badge {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary-green);
+  font-weight: 700;
+}
+
+.hw-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.hw-spec-table {
+  width: 100%;
+  font-size: 0.72rem;
+  border-collapse: collapse;
+}
+
+.hw-spec-table td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.hw-spec-table td:first-child {
+  color: var(--text-muted);
+  font-weight: 600;
+  width: 45%;
+}
+
+/* Circuit Box */
+.schematic-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  margin-top: 16px;
+}
+
+/* Virtual 16x2 I2C LCD Emulation */
+.lcd-box {
+  background: #0a140f;
+  border: 3px solid #1e3a2b;
+  border-radius: 10px;
+  padding: 14px;
+  max-width: 420px;
+  margin: 16px auto;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.lcd-screen {
+  background-color: #6baa2f;
+  box-shadow: 0 0 16px rgba(107, 170, 47, 0.35);
+  border-radius: 4px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #14280b;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  user-select: none;
+}
+
+.lcd-line {
+  white-space: pre;
+  overflow: hidden;
+}
+
+/* Footer (Exact match to reference photo) */
+.footer-bar {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 16px 28px;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.footer-tagline {
+  color: #86efac;
+  font-size: 0.78rem;
+}
+
+.footer-right {
+  color: #a7f3d0;
+  font-size: 0.78rem;
+}
+
+/* Toast Alerts */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.toast {
+  background: var(--bg-card);
+  border: 1px solid var(--primary-green);
+  color: var(--text-dark);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  box-shadow: var(--shadow-md);
+  animation: slideIn 0.3s ease;
+  pointer-events: auto;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+
+/* ==========================================================================
+   KISAN MITRA — FRESH FIELD / AGRO-TECH VISUAL THEME
+   Visual refresh only: existing dashboard structure and application logic
+   remain intact. All interface typography is unified here.
+   ========================================================================== */
+:root {
+  --bg-app: #f3f6ef;
+  --bg-card: rgba(255,255,255,.94);
+  --bg-subtle: #edf3e8;
+  --border-light: #dce7d8;
+  --border-card: #d6e2d2;
+  --primary-green: #24734a;
+  --primary-light: #3b9462;
+  --primary-soft: #e0f1e5;
+  --primary-hover: #185b38;
+  --accent-blue: #2586a6;
+  --accent-blue-soft: #e2f2f6;
+  --accent-amber: #c18132;
+  --accent-amber-soft: #fbf0dc;
+  --accent-red: #c45a50;
+  --accent-red-soft: #f9e7e3;
+  --text-dark: #20342a;
+  --text-muted: #68796d;
+  --text-dim: #8b9b8e;
+  --text-brand: #174e32;
+  --footer-bg: #173e2d;
+  --footer-text: #e0f0e4;
+  --shadow-sm: 0 3px 12px rgba(33, 67, 43, .06);
+  --shadow-card: 0 8px 26px rgba(33, 67, 43, .075);
+  --shadow-md: 0 14px 34px rgba(33, 67, 43, .12);
+  --font-main: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+* { font-family: var(--font-main); }
+body {
+  background:
+    radial-gradient(ellipse at 8% 8%, rgba(185, 216, 166, .28), transparent 34%),
+    radial-gradient(ellipse at 92% 32%, rgba(186, 220, 214, .25), transparent 32%),
+    linear-gradient(145deg, #f7f8f1 0%, #eef4eb 48%, #f5f7f1 100%);
+  color: var(--text-dark);
+  letter-spacing: .005em;
+}
+body.dark-theme {
+  --bg-app: #101d17;
+  --bg-card: rgba(25, 43, 33, .96);
+  --bg-subtle: #20372a;
+  --border-light: #2c4837;
+  --border-card: #34513e;
+  --primary-green: #63b982;
+  --primary-light: #80cf9a;
+  --primary-soft: #203e2c;
+  --primary-hover: #9bddad;
+  --accent-blue-soft: #1d3a43;
+  --accent-amber-soft: #44351f;
+  --accent-red-soft: #472b29;
+  --text-dark: #e6f0e7;
+  --text-muted: #a7b9aa;
+  --text-dim: #748b79;
+  --text-brand: #9bddad;
+  --footer-bg: #0b1711;
+  background:
+    radial-gradient(ellipse at 8% 8%, rgba(54, 111, 72, .18), transparent 34%),
+    radial-gradient(ellipse at 92% 32%, rgba(40, 105, 103, .14), transparent 32%),
+    linear-gradient(145deg, #101d17 0%, #14251b 55%, #101b16 100%);
+}
+
+h1, h2, h3, h4, .brand-title, .section-title, .hero-title, .card-title,
+.metric-value, .footer-brand {
+  font-family: 'Space Grotesk', var(--font-main) !important;
+  letter-spacing: -.035em;
+}
+button, input, select, textarea { font: inherit; }
+button, .btn-usb, .nav-item, .tool-select { letter-spacing: .01em; }
+code, pre, .font-mono, .hw-spec-table, #arduinoCodeSnippet {
+  font-family: var(--font-mono) !important;
+}
+
+.navbar {
+  background: rgba(250, 252, 247, .88);
+  border-bottom: 1px solid rgba(204, 220, 201, .8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+body.dark-theme .navbar { background: rgba(17, 32, 23, .88); }
+.brand-logo-svg { filter: drop-shadow(0 4px 7px rgba(36,115,74,.16)); }
+.brand-title { font-size: 1.32rem; }
+.nav-item { border-radius: 999px; padding: 9px 15px; }
+.nav-item.active { box-shadow: inset 0 0 0 1px rgba(36,115,74,.08); }
+.btn-icon, .tool-select { border-radius: 10px; }
+.btn-usb { border-radius: 999px; padding: 9px 17px; box-shadow: 0 5px 12px rgba(36,115,74,.18); }
+
+.hero-wrapper { margin-top: 22px; }
+.hero-banner {
+  min-height: 270px;
+  border-radius: 22px;
+  padding: 42px 52px;
+  background:
+    linear-gradient(105deg, rgba(13, 48, 32, .96) 0%, rgba(24, 83, 53, .88) 48%, rgba(31, 103, 67, .38) 100%),
+    radial-gradient(circle at 83% 28%, rgba(224, 239, 173, .34), transparent 20%),
+    linear-gradient(135deg, #1c6542 0%, #80a96b 52%, #d0dba0 100%) !important;
+  box-shadow: 0 18px 42px rgba(25, 75, 47, .18);
+}
+.hero-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background-image: radial-gradient(rgba(255,255,255,.8) .7px, transparent .7px);
+  background-size: 17px 17px;
+  mask-image: linear-gradient(90deg, transparent, black);
+}
+.hero-banner > * { position: relative; z-index: 1; }
+.hero-title { letter-spacing: -.045em; }
+
+.card, .metric-card, .chart-card, .hw-card, .panel, .content-card {
+  border: 1px solid var(--border-card);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+}
+.card, .metric-card, .chart-card, .hw-card { transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease; }
+.card:hover, .metric-card:hover, .chart-card:hover, .hw-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(59,148,98,.42);
+}
+.section-title { font-weight: 700; }
+.section-header { margin-bottom: 20px; }
+button:not(.btn-icon):not(.nav-item) { transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+button:not(.btn-icon):not(.nav-item):hover { transform: translateY(-1px); }
+input, select, textarea { border-radius: 10px; }
+
+.footer-bar {
+  background: linear-gradient(110deg, #153c2b, #20563b);
+  border-top: 1px solid rgba(255,255,255,.08);
+  color: #e3f1e6;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.footer-brand { font-weight: 700; }
+.toast-container { font-family: var(--font-main); }
+
+/* A gentle entrance treatment; respects reduced-motion preferences. */
+body.theme-ready .hero-wrapper, body.theme-ready main, body.theme-ready .main-content {
+  animation: rise-in .55s cubic-bezier(.2,.7,.2,1) both;
+}
+@keyframes rise-in { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+@media (max-width: 700px) {
+  .hero-banner { padding: 30px 24px; border-radius: 16px; }
+  .navbar { padding-left: 14px; padding-right: 14px; }
+}
+
+  
+
+/* ==========================================================================
+   DEEP FOREST + MIDNIGHT BLUE THEME — high-contrast dark interface
+   Applied as the default appearance across the complete dashboard.
+   ========================================================================== */
+:root {
+  color-scheme: dark;
+  --bg-app: #030b12;
+  --bg-card: #081a24;
+  --bg-subtle: #0b2630;
+  --border-light: #123b3a;
+  --border-card: #17464a;
+  --primary-green: #20c878;
+  --primary-light: #42e69a;
+  --primary-soft: #0d382c;
+  --primary-hover: #5af0aa;
+  --accent-blue: #36a9ff;
+  --accent-blue-soft: #0c2d49;
+  --accent-amber: #f2b84b;
+  --accent-amber-soft: #3a2b13;
+  --accent-red: #ff6b72;
+  --accent-red-soft: #3b1d28;
+  --text-dark: #e7f4f2;
+  --text-muted: #a5c1c4;
+  --text-dim: #75969d;
+  --text-brand: #5af0aa;
+  --footer-bg: #020910;
+  --footer-text: #c8f8e2;
+  --shadow-sm: 0 4px 14px rgba(0,0,0,.28);
+  --shadow-card: 0 10px 28px rgba(0,0,0,.32);
+  --shadow-md: 0 16px 38px rgba(0,0,0,.42);
+}
+html, body {
+  background: #030b12 !important;
+  color: var(--text-dark) !important;
+}
+body {
+  background:
+    radial-gradient(ellipse at 8% 0%, rgba(13,104,67,.30), transparent 36%),
+    radial-gradient(ellipse at 95% 18%, rgba(15,83,139,.28), transparent 38%),
+    linear-gradient(135deg, #020910 0%, #061a20 48%, #07152a 100%) !important;
+  background-attachment: fixed !important;
+}
+/* All main surfaces */
+.navbar, .card, .panel, .metric-card, .stat-card, .tool-card,
+.section-card, .content-card, .modal-content, .dropdown-menu,
+.table-container, .chart-container, .sensor-card, .info-card,
+main > section, .dashboard-section {
+  background-color: rgba(7, 27, 37, .96) !important;
+  color: var(--text-dark) !important;
+  border-color: var(--border-card) !important;
+  box-shadow: var(--shadow-card);
+}
+.navbar {
+  background: rgba(3, 14, 23, .94) !important;
+  border-bottom: 1px solid #17464a !important;
+  backdrop-filter: blur(18px);
+}
+body.dark-theme .navbar { background: rgba(3, 14, 23, .94) !important; }
+/* Darken common nested blocks and form controls */
+input, select, textarea, .form-control, pre, code,
+.table-wrap, .code-block, .output-box {
+  background-color: #061722 !important;
+  color: #e7f4f2 !important;
+  border-color: #1b4b55 !important;
+}
+::placeholder { color: #75969d !important; opacity: 1; }
+/* Headings and readable copy */
+h1, h2, h3, h4, h5, h6, p, label, li, th, td,
+.brand-title, .section-title, .card-title, .metric-label,
+.hero-subtitle, .nav-item, .footer-brand {
+  color: var(--text-dark);
+}
+small, .muted, .text-muted, .description, .helper-text { color: var(--text-muted) !important; }
+a { color: #55b7ff; }
+a:hover { color: #83d0ff; }
+/* Forest green and deep blue accents */
+button, .btn, .primary-btn, .nav-item.active, .tab.active {
+  border-color: #168b63;
+}
+button.primary, .btn-primary, .primary-btn {
+  background: linear-gradient(115deg, #087747, #075a91) !important;
+  color: #f2fff9 !important;
+}
+button:hover, .btn:hover { filter: brightness(1.12); }
+.icon-blue, .icon-cyan { background: #0b2e49 !important; color: #55baff !important; }
+.icon-green { background: #0d382c !important; color: #4be39a !important; }
+.icon-amber { background: #3a2b13 !important; color: #f2c46b !important; }
+.badge, .status-badge { border-color: #24545a; }
+/* Tables, separators, charts and footer */
+table { color: var(--text-dark) !important; }
+th { background: #0b2c38 !important; color: #bce9e5 !important; }
+td { border-color: #153d46 !important; }
+tr:nth-child(even) td { background: rgba(12, 43, 53, .48) !important; }
+hr, .divider { border-color: #17464a !important; }
+footer, .footer { background: #020910 !important; color: #c8f8e2 !important; }
+/* Keep the hero dramatic, with forest green + midnight blue */
+.hero, .hero-banner, .hero-section {
+  background-image: linear-gradient(115deg, rgba(2,25,20,.94), rgba(3,22,45,.90)) !important;
+  color: #effff8 !important;
+  border-color: #155044 !important;
+}
+/* Ensure dark mode toggle cannot switch the page back to pale colors */
+body.dark-theme {
+  --bg-app: #030b12; --bg-card: #081a24; --bg-subtle: #0b2630;
+  --border-light: #123b3a; --border-card: #17464a;
+  --text-dark: #e7f4f2; --text-muted: #a5c1c4; --text-dim: #75969d;
+  --text-brand: #5af0aa;
+  background: linear-gradient(135deg, #020910, #061a20 48%, #07152a) fixed !important;
+}
+
+</style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       Top Navigation Bar (Kisan Mitra Branding)
+       ========================================================================= -->
+  <header class="navbar">
+    <div class="brand" onclick="switchTab('dashboard')">
+      <!-- 2 Leaves + Water Droplet SVG Icon -->
+      <svg class="brand-logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 36C12 36 8 26 18 16C28 6 36 8 36 8C36 8 36 20 26 30C18 38 12 36 12 36Z" fill="#15803d" />
+        <path d="M22 38C22 38 16 30 22 22C28 14 36 14 36 14C36 14 34 24 28 32C24 38 22 38 22 38Z" fill="#22c55e" opacity="0.85"/>
+        <path d="M24 38C20 38 17 34.5 17 30C17 25 24 18 24 18C24 18 31 25 31 30C31 34.5 28 38 24 38Z" fill="#0284c7" />
+      </svg>
+      <div class="brand-text">
+        <span class="brand-title">KISAN MITRA</span>
+        <span class="brand-subtitle">Smart Irrigation & Water Quality Monitoring System</span>
+      </div>
+    </div>
+
+    <!-- Navigation links -->
+    <nav class="nav-links">
+      <button class="nav-item active" data-tab="dashboard" onclick="switchTab('dashboard')">
+        🏠 Home
+      </button>
+      <button class="nav-item" data-tab="dashboard" onclick="switchTab('dashboard')">
+        📊 Dashboard
+      </button>
+      <button class="nav-item" data-tab="water-quality" onclick="switchTab('water-quality')">
+        💧 Water Quality & DO
+      </button>
+      <button class="nav-item" data-tab="irrigation" onclick="switchTab('irrigation')">
+        🌱 Irrigation Guide
+      </button>
+      <button class="nav-item" data-tab="hardware" onclick="switchTab('hardware')">
+        ⚡ Hardware & Circuit
+      </button>
+      <button class="nav-item" data-tab="code" onclick="switchTab('code')">
+        💻 Arduino Code
+      </button>
+    </nav>
+
+    <!-- Right Controls: Language, Theme Toggle, Arduino Web Serial -->
+    <div class="nav-tools">
+      <select class="tool-select" id="langSelect" onchange="toggleLanguage(this.value)">
+        <option value="en">🌐 English</option>
+        <option value="hi">🌐 हिंदी (Hindi)</option>
+      </select>
+      
+      <button class="btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        🌙
+      </button>
+
+      <button class="btn-usb" id="btnUsbConnect" onclick="handleUsbConnect()" title="Connect real Arduino Uno via Web Serial">
+        🔌 Connect Arduino
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       Hero Banner (Exact match to reference photo)
+       ========================================================================= -->
+  <div class="hero-wrapper">
+    <div class="hero-banner">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          <span id="heroTitle1">Smart Water.</span>
+          <span id="heroTitle2">Healthy Crops.</span>
+        </h1>
+        <p class="hero-subtitle" id="heroSubtitle">
+          Kisan Mitra helps farmers monitor water quality and manage irrigation efficiently.
+        </p>
+        <button class="hero-btn" onclick="scrollToDashboard()">
+          <span id="heroBtnText">View Dashboard</span> &rarr;
+        </button>
+      </div>
+
+      <div class="hero-farmer-side">
+        <div class="hero-quote">
+          "Better Water<br>
+          Better Farming<br>
+          Brighter Future"
+        </div>
+        <div class="hero-quote-sub">🌾 Kishan Mitra Agri IoT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       Main Content Container
+       ========================================================================= -->
+  <main class="main-container">
+
+    <!-- =======================================================================
+         TAB 1: DASHBOARD (Exact Match to User's Reference Photo)
+         ======================================================================= -->
+    <div id="tab-dashboard" class="tab-section active">
+
+      <!-- Section Header -->
+      <div class="section-header" id="dashboardAnchor">
+        <div class="section-title-wrap">
+          <span class="section-icon">🌿</span>
+          <div>
+            <h2 class="section-title" id="secTitle">Sensor Readings</h2>
+            <p class="section-sub" id="secSub">Current water parameters from Arduino monitoring system</p>
+          </div>
+        </div>
+
+        <div class="device-status-badge">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="deviceStatusText">Device reading: Online</span>
+        </div>
+      </div>
+
+      <!-- ROW 1: 4 SENSOR CARDS -->
+      <div class="sensor-cards-grid">
+        
+        <!-- Card 1: pH Level -->
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-blue">💧</div>
+            <span class="card-header-label">pH Level</span>
+          </div>
+          <div class="card-main-val">
+            <span class="val-large" id="valPh">7.2</span>
+          </div>
+          <div class="pill-badge pill-good" id="badgePh">Good</div>
+          <div class="card-subtext" id="subPh">Ideal range: 6.5 ~ 8.5</div>
+        </div>
+
+        <!-- Card 2: TDS -->
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-amber">🧪</div>
+            <span class="card-header-label">TDS</span>
+          </div>
+          <div class="card-main-val">
+            <span class="val-large" id="valTds">320</span>
+            <span class="val-unit">ppm</span>
+          </div>
+          <div class="pill-badge pill-acceptable" id="badgeTds">Acceptable</div>
+          <div class="card-subtext" id="subTds">Ideal range: 150 ~ 300 ppm</div>
+        </div>
+
+        <!-- Card 3: Water Level -->
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-cyan">🚰</div>
+            <span class="card-header-label">Water Level</span>
+          </div>
+          <div class="card-main-val">
+            <span class="val-large" id="valLevel">68</span>
+            <span class="val-unit">%</span>
+          </div>
+          <div class="pill-badge pill-normal" id="badgeLevel">Normal</div>
+          <div class="card-subtext" id="subLevel">Tank level</div>
+        </div>
+
+        <!-- Card 4: Irrigation Status -->
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-green">🍃</div>
+            <span class="card-header-label">Irrigation Status</span>
+          </div>
+          <div class="card-main-val" style="margin-bottom: 2px;">
+            <span class="val-large" id="valIrrigStatus" style="font-size: 1.55rem; font-family: inherit;">Monitor Soil</span>
+          </div>
+          <div style="font-size: 0.82rem; font-weight: 700; color: #15803d; margin-bottom: 4px;" id="valIrrigAction">
+            Check soil moisture
+          </div>
+          <div class="card-subtext" id="subIrrig">Do not irrigate immediately</div>
+        </div>
+
+      </div>
+
+      <!-- ROW 2: 4 ANALYTICS & TANK CARDS -->
+      <div class="analytics-grid">
+        
+        <!-- Card 5: pH Level Trend -->
+        <div class="analytics-card">
+          <div class="analytics-header">
+            <span>💧</span>
+            <span>pH Level Trend</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chartPh"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 6: TDS Trend -->
+        <div class="analytics-card">
+          <div class="analytics-header">
+            <span>🧪</span>
+            <span>TDS Trend</span>
+          </div>
+          <div class="chart-wrap">
+            <canvas id="chartTds"></canvas>
+          </div>
+        </div>
+
+        <!-- Card 7: Water Tank Level (Donut + 3D Blue Water Canister) -->
+        <div class="analytics-card">
+          <div class="analytics-header">
+            <span>🚰</span>
+            <span>Water Tank Level</span>
+          </div>
+          <div class="tank-visual-row">
+            
+            <!-- Circular Donut Progress Ring -->
+            <div class="donut-wrap">
+              <svg class="donut-svg" viewBox="0 0 36 36">
+                <path class="donut-circle-bg"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="donut-circle-progress" id="donutProgress"
+                  stroke-dasharray="68, 100"
+                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <div class="donut-text">
+                <span id="donutPercentText">68%</span>
+                <span style="font-size: 0.55rem;">Level</span>
+              </div>
+            </div>
+
+            <!-- Detail Text -->
+            <div class="tank-info-col">
+              <div class="tank-detail-label">Tank Level: <span id="tankLevelPctText">68%</span></div>
+              <div class="tank-detail-sub">Approx. <strong id="tankVolumeText">680L</strong><br>(Out of 1000 L)</div>
+            </div>
+
+            <!-- Graphic of Blue Water Canister / Dispenser Jar -->
+            <div class="canister-box">
+              <div class="canister-cap"></div>
+              <div class="canister-body">
+                <div class="canister-water" id="canisterWater"></div>
+                <div class="canister-rib r1"></div>
+                <div class="canister-rib r2"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Card 8: Irrigation Recommendation -->
+        <div class="analytics-card">
+          <div class="analytics-header">
+            <span>🌾</span>
+            <span>Irrigation Recommendation</span>
+          </div>
+          <div class="rec-body">
+            <div class="rec-sprout-icon">🌱</div>
+            <div>
+              <div class="rec-text-title">Check soil moisture before watering</div>
+              <div class="rec-text-sub">Current conditions are suitable. Avoid over-irrigation.</div>
+            </div>
+          </div>
+          <button class="btn-rec-guide" onclick="switchTab('irrigation')">
+            📖 View More Guide
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Quick Interactive Hardware Control Bar (Relay & Pump) -->
+      <div class="card" style="margin-top: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 12px; height: 12px; border-radius: 50%; background: #374151;" id="relayDot"></div>
+            <div>
+              <strong style="font-size: 0.9rem;" id="pumpStatusLabel">Water Pump (Relay D8): IDLE</strong>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Auto-refill enabled (starts when &lt;30%, stops when &gt;85%)</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <button class="btn-usb" style="background: #16a34a;" onclick="togglePump(true)">
+              ▶ Start Pump
+            </button>
+            <button class="btn-usb" style="background: #dc2626;" onclick="togglePump(false)">
+              ⏹ Stop Pump
+            </button>
+            <button class="btn-icon" style="width: auto; padding: 0 12px; font-size: 0.78rem;" onclick="switchTab('hardware')">
+              ⚡ View Circuit & Wiring
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         TAB 2: WATER QUALITY & DISSOLVED OXYGEN (DO)
+         ======================================================================= -->
+    <div id="tab-water-quality" class="tab-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">💧 Comprehensive Water Quality & DO Analysis</h2>
+          <p class="section-sub">Detailed breakdown of chemical and organic parameters for crops and aquaculture</p>
+        </div>
+      </div>
+
+      <div class="sensor-cards-grid">
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-blue">🧪</div>
+            <span class="card-header-label">pH Electrode</span>
+          </div>
+          <div class="card-main-val"><span class="val-large" id="wqPh">7.2</span></div>
+          <div class="pill-badge pill-good">Optimal Range</div>
+          <p class="card-subtext">Pin A0 &bull; Critical for plant nutrient uptake (N-P-K)</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-amber">🔬</div>
+            <span class="card-header-label">TDS / TOD Sensor</span>
+          </div>
+          <div class="card-main-val"><span class="val-large" id="wqTds">320</span><span class="val-unit">ppm</span></div>
+          <div class="pill-badge pill-acceptable">Acceptable Mineral Load</div>
+          <p class="card-subtext">Pin A1 &bull; Prevents fertilizer root burn and monitors organic runoff</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-cyan">💨</div>
+            <span class="card-header-label">Dissolved Oxygen (DO)</span>
+          </div>
+          <div class="card-main-val"><span class="val-large" id="wqDo">7.4</span><span class="val-unit">mg/L</span></div>
+          <div class="pill-badge pill-good">Healthy Aeration</div>
+          <p class="card-subtext">Pin A2 &bull; Protects roots from Pythium fungal rot & supports fish</p>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-icon-circle icon-green">🌡️</div>
+            <span class="card-header-label">Water Temperature</span>
+          </div>
+          <div class="card-main-val"><span class="val-large">24.5</span><span class="val-unit">&deg;C</span></div>
+          <div class="pill-badge pill-normal">Ambient Ideal</div>
+          <p class="card-subtext">Optimal range: 20&deg;C ~ 28&deg;C for crop root transpiration</p>
+        </div>
+      </div>
+
+      <!-- Agricultural Advisory Chart -->
+      <div class="card" style="margin-top: 16px;">
+        <h3 style="font-size: 1rem; margin-bottom: 8px;">🌾 Farmer Action Checklist based on Water Quality</h3>
+        <table class="hw-spec-table">
+          <tr>
+            <td><strong>pH &lt; 6.0 (Acidic Hazard)</strong></td>
+            <td>Risk of root damage and heavy metal toxicity. Add agricultural lime or potassium bicarbonate to reservoir.</td>
+          </tr>
+          <tr>
+            <td><strong>pH &gt; 8.0 (Alkaline Lockout)</strong></td>
+            <td>Phosphorus and micronutrients become locked in water. Add diluted citric or phosphoric acid.</td>
+          </tr>
+          <tr>
+            <td><strong>DO &lt; 5.0 mg/L (Hypoxia)</strong></td>
+            <td>Stagnant water causes root asphyxiation. Run irrigation water pump or bubbler for 15 minutes to aerate.</td>
+          </tr>
+          <tr>
+            <td><strong>TDS &gt; 800 ppm (High Salts)</strong></td>
+            <td>Risk of salt crusting and leaf burn. Dilute reservoir with fresh rainwater or canal supply.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TAB 3: IRRIGATION GUIDE
+         ======================================================================= -->
+    <div id="tab-irrigation" class="tab-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">🌱 Farmer Irrigation & Moisture Guide</h2>
+          <p class="section-sub">Smart watering practices tailored for Indian agriculture and sustainable water conservation</p>
+        </div>
+      </div>
+
+      <div class="hw-showcase-grid">
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🌾</span>
+            <span class="hw-title">Rice / Paddy Field</span>
+          </div>
+          <p class="hw-desc">Maintain 2-5 cm shallow standing water during tillering. Drain field 10 days before harvest to save up to 30% groundwater.</p>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🌿</span>
+            <span class="hw-title">Wheat Crop</span>
+          </div>
+          <p class="hw-desc">Requires 4-6 critical irrigations: Crown root initiation (21 days), Tillering, Boot stage, and Grain filling stage.</p>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🍅</span>
+            <span class="hw-title">Vegetables & Horticulture</span>
+          </div>
+          <p class="hw-desc">Use drip irrigation. Irrigate in early morning (6 AM - 8 AM) or late evening to minimize midday evaporation losses.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         TAB 4: HARDWARE & CIRCUIT (ALL 12 COMPONENTS SHOWCASED)
+         ======================================================================= -->
+    <div id="tab-hardware" class="tab-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">⚡ Hardware Component Showcase & Circuit Diagram</h2>
+          <p class="section-sub">Complete bill of materials, pin connections, and interactive Arduino Uno schematic</p>
+        </div>
+      </div>
+
+      <!-- Virtual 16x2 I2C LCD Display -->
+      <div class="card" style="text-align: center;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+          📟 Live 16x2 LCD Emulation (I2C Module Address: 0x27 on A4/A5)
+        </span>
+        <div class="lcd-box">
+          <div class="lcd-screen">
+            <div class="lcd-line" id="lcdText1">pH:7.20  DO:7.4</div>
+            <div class="lcd-line" id="lcdText2">TDS:320  LVL:68%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 12 Components Grid -->
+      <div class="hw-showcase-grid">
+        
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🧠</span>
+            <span class="hw-title">Arduino Uno R3</span>
+            <span class="hw-pin-badge">Main Brain</span>
+          </div>
+          <div class="hw-desc">Microcontroller running at 16 MHz with 14 digital and 6 analog pins. Executes automated hysteresis irrigation logic.</div>
+          <table class="hw-spec-table">
+            <tr><td>MCU Chip</td><td>ATmega328P (5V)</td></tr>
+            <tr><td>Baud Rate</td><td>115200 (USB Web Serial)</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🧪</span>
+            <span class="hw-title">Analog pH Sensor</span>
+            <span class="hw-pin-badge">Pin A0</span>
+          </div>
+          <div class="hw-desc">Glass electrode with BNC module for measuring hydrogen ion concentration (0-14 pH).</div>
+          <table class="hw-spec-table">
+            <tr><td>Operating V</td><td>5.0V DC</td></tr>
+            <tr><td>Range</td><td>0.0 - 14.0 pH</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🔬</span>
+            <span class="hw-title">TDS / TOD Sensor</span>
+            <span class="hw-pin-badge">Pin A1</span>
+          </div>
+          <div class="hw-desc">Waterproof AC probe checking dissolved solids and organic contamination (0-2000 ppm).</div>
+          <table class="hw-spec-table">
+            <tr><td>Accuracy</td><td>&plusmn; 5% F.S.</td></tr>
+            <tr><td>Electrode</td><td>Titanium 2-pin</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">💨</span>
+            <span class="hw-title">DO Sensor</span>
+            <span class="hw-pin-badge">Pin A2</span>
+          </div>
+          <div class="hw-desc">Galvanic dissolved oxygen probe with permeable membrane for oxygen tracking (0-20 mg/L).</div>
+          <table class="hw-spec-table">
+            <tr><td>Response</td><td>&lt; 60 seconds</td></tr>
+            <tr><td>Safe Level</td><td>&gt; 5.5 mg/L</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🚰</span>
+            <span class="hw-title">Water Level Sensor</span>
+            <span class="hw-pin-badge">Pin A3</span>
+          </div>
+          <div class="hw-desc">Continuous depth sensor tracking tank capacity (0-100%) to trigger auto refilling.</div>
+          <table class="hw-spec-table">
+            <tr><td>Low Threshold</td><td>30% (Refill)</td></tr>
+            <tr><td>Lockout</td><td>5% (Dry-run safety)</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">📟</span>
+            <span class="hw-title">16x2 LCD Display</span>
+            <span class="hw-pin-badge">I2C Module</span>
+          </div>
+          <div class="hw-desc">Alphanumeric character screen with PCF8574 I2C backpack saving 12 pins (SDA &rarr; A4, SCL &rarr; A5).</div>
+          <table class="hw-spec-table">
+            <tr><td>I2C Address</td><td>0x27 / 0x3F</td></tr>
+            <tr><td>Lines</td><td>16 chars &times; 2 lines</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🎛️</span>
+            <span class="hw-title">5V Relay Module</span>
+            <span class="hw-pin-badge">Pin D8</span>
+          </div>
+          <div class="hw-desc">Optocoupler-isolated relay switching the 12V pump circuit without loading Arduino logic.</div>
+          <table class="hw-spec-table">
+            <tr><td>Trigger</td><td>Active LOW</td></tr>
+            <tr><td>Capacity</td><td>10A 250VAC / 30VDC</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">⚙️</span>
+            <span class="hw-title">12V Water Pump</span>
+            <span class="hw-pin-badge">Relay NO</span>
+          </div>
+          <div class="hw-desc">Submersible brushless DC water pump for reservoir refilling and field crop irrigation.</div>
+          <table class="hw-spec-table">
+            <tr><td>Voltage</td><td>12V DC</td></tr>
+            <tr><td>Flow Rate</td><td>240 Liters / Hour</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">⚡</span>
+            <span class="hw-title">12V Power Supply</span>
+            <span class="hw-pin-badge">Common GND</span>
+          </div>
+          <div class="hw-desc">Regulated 12V 2A DC power supply powering pump with common ground tied to Arduino.</div>
+          <table class="hw-spec-table">
+            <tr><td>Current</td><td>2000 mA (24W)</td></tr>
+            <tr><td>Input</td><td>100-240V AC</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🧵</span>
+            <span class="hw-title">Connecting Wires</span>
+            <span class="hw-pin-badge">DuPont</span>
+          </div>
+          <div class="hw-desc">Color-coded 26 AWG cables connecting the Arduino breadboard to all sensors and relay.</div>
+          <table class="hw-spec-table">
+            <tr><td>Color Standard</td><td>Red=5V, Blk=GND</td></tr>
+            <tr><td>Data Signals</td><td>Blue, Yellow, Green</td></tr>
+          </table>
+        </div>
+
+        <div class="hw-card">
+          <div class="hw-header">
+            <span class="hw-icon">🏢</span>
+            <span class="hw-title">Water Tank for Testing</span>
+            <span class="hw-pin-badge">100L Rig</span>
+          </div>
+          <div class="hw-desc">Graduated acrylic reservoir test tank for closed-loop calibration and auto pump testing.</div>
+          <table class="hw-spec-table">
+            <tr><td>Capacity</td><td>100 L Scale</td></tr>
+            <tr><td>Mountings</td><td>Submerged probe rack</td></tr>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Schematic Box -->
+      <div class="schematic-wrapper">
+        <h3 style="font-size: 1rem; margin-bottom: 8px;">📋 Arduino Uno Pinout Matrix</h3>
+        <table class="hw-spec-table">
+          <thead>
+            <tr style="background: var(--bg-subtle);">
+              <th>Component</th>
+              <th>Module Pin</th>
+              <th>Arduino Pin</th>
+              <th>Signal Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>pH Sensor</strong></td><td>PO</td><td><strong>Pin A0</strong></td><td>Analog 0 - 5V</td></tr>
+            <tr><td><strong>TDS / TOD Sensor</strong></td><td>A</td><td><strong>Pin A1</strong></td><td>Analog 0 - 5V</td></tr>
+            <tr><td><strong>DO Sensor</strong></td><td>A</td><td><strong>Pin A2</strong></td><td>Analog 0 - 3V</td></tr>
+            <tr><td><strong>Water Level</strong></td><td>S</td><td><strong>Pin A3</strong></td><td>Analog 0 - 5V</td></tr>
+            <tr><td><strong>16x2 LCD (I2C)</strong></td><td>SDA</td><td><strong>Pin A4</strong></td><td>I2C Data line</td></tr>
+            <tr><td><strong>16x2 LCD (I2C)</strong></td><td>SCL</td><td><strong>Pin A5</strong></td><td>I2C Clock line</td></tr>
+            <tr><td><strong>Relay Module</strong></td><td>IN</td><td><strong>Pin D8</strong></td><td>Digital (Active LOW)</td></tr>
+            <tr><td><strong>Sensors & LCD</strong></td><td>VCC / GND</td><td><strong>5V / GND</strong></td><td>5V Regulated Bus</td></tr>
+            <tr><td><strong>12V Pump & PSU</strong></td><td>(+) / (-)</td><td><strong>Relay NO / GND</strong></td><td>Switched 12V High Current</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- =======================================================================
+         TAB 5: ARDUINO CODE (.INO)
+         ======================================================================= -->
+    <div id="tab-code" class="tab-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">💻 Arduino Uno Firmware (FarmerWaterMonitor.ino)</h2>
+          <p class="section-sub">Upload this sketch to your Arduino Uno board using the Arduino IDE</p>
+        </div>
+        <button class="btn-usb" onclick="copyArduinoCode()">📋 Copy Sketch</button>
+      </div>
+
+      <div class="card" style="background: #090f0c; color: #86efac; font-family: var(--font-mono); font-size: 0.8rem; overflow-x: auto; max-height: 480px;">
+        <pre><code id="arduinoCodeSnippet">/*
+ * KISAN MITRA - Smart Farmer Water Quality & Irrigation Station
+ * Board: Arduino Uno R3 | Baud: 115200 (Web Serial Compatible)
+ */
+#include &lt;Wire.h&gt;
+#include &lt;LiquidCrystal_I2C.h&gt;
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+const int PIN_PH    = A0;
+const int PIN_TDS   = A1;
+const int PIN_DO    = A2;
+const int PIN_LEVEL = A3;
+const int PIN_RELAY = 8; // Active LOW
+
+float phVal = 7.20;
+float tdsVal = 320.0;
+float doVal = 7.40;
+int   levelPct = 68;
+bool  pumpActive = false;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(PIN_RELAY, OUTPUT);
+  digitalWrite(PIN_RELAY, HIGH); // Pump OFF
+
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("KISAN MITRA AGRI");
+  lcd.setCursor(0, 1);
+  lcd.print("SMART WATER v2.0");
+  delay(1500);
+}
+
+void loop() {
+  // Read analog pins
+  int rawPH = analogRead(PIN_PH);
+  phVal = 7.00 + ((2.50 - (rawPH * 5.0 / 1023.0)) * 3.5);
+
+  int rawTDS = analogRead(PIN_TDS);
+  tdsVal = (rawTDS * 5.0 / 1023.0) * 300.0;
+
+  int rawDO = analogRead(PIN_DO);
+  doVal = (rawDO * 5.0 / 1023.0) * 5.0;
+
+  int rawLvl = analogRead(PIN_LEVEL);
+  levelPct = map(rawLvl, 100, 750, 0, 100);
+
+  // Auto pump logic
+  if (levelPct &lt; 30 &amp;&amp; !pumpActive) {
+    pumpActive = true;
+    digitalWrite(PIN_RELAY, LOW); // Turn pump ON
+  } else if (levelPct &gt; 85 &amp;&amp; pumpActive) {
+    pumpActive = false;
+    digitalWrite(PIN_RELAY, HIGH); // Turn pump OFF
+  }
+
+  // Send JSON over USB Serial to Kisan Mitra web dashboard
+  Serial.print("{\"ph\":"); Serial.print(phVal, 2);
+  Serial.print(",\"tds\":"); Serial.print((int)tdsVal);
+  Serial.print(",\"do\":"); Serial.print(doVal, 1);
+  Serial.print(",\"level\":"); Serial.print(levelPct);
+  Serial.print(",\"pump\":"); Serial.print(pumpActive ? "true" : "false");
+  Serial.println("}");
+
+  // Update physical 16x2 LCD
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("pH:"); lcd.print(phVal, 1);
+  lcd.print(" DO:"); lcd.print(doVal, 1);
+  lcd.setCursor(0, 1);
+  lcd.print("TDS:"); lcd.print((int)tdsVal);
+  lcd.print(" L:"); lcd.print(levelPct); lcd.print("%");
+
+  delay(1000);
+}</code></pre>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       Footer Bar (Exact Match to Reference Photo)
+       ========================================================================= -->
+  <footer class="footer-bar">
+    <div class="footer-left">
+      <!-- Leaf icon -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2">
+        <path d="M12 2C6.5 2 2 6.5 2 12c0 5.5 4.5 10 10 10s10-4.5 10-10C22 6.5 17.5 2 12 2z"></path>
+        <path d="M12 22V12"></path>
+        <path d="M12 12C9 9 7 9 7 9s0 3 3 6"></path>
+        <path d="M12 12c3-3 5-3 5-3s0 3-3 6"></path>
+      </svg>
+      <div>
+        <span class="footer-brand">Kisan Mitra</span>
+        <span class="footer-tagline" id="footerTagline"> | Smart Water Management for Sustainable Agriculture</span>
+      </div>
+    </div>
+
+    <div class="footer-right" id="footerRight">
+      Healthy Soil &bull; Clean Water &bull; Better Tomorrow
+    </div>
+  </footer>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- =========================================================================
+       100% SELF-CONTAINED JAVASCRIPT
+       ========================================================================= -->
+  <script>
+// State matching user reference photo
+const state = {
+  ph: 7.2,
+  tds: 320,
+  doVal: 7.4,
+  level: 68,
+  pump: false,
+  autoMode: true,
+  isDark: false,
+  lang: 'en'
+};
+
+// Historical trend data matching the screenshot
+const trendData = {
+  dates: ['Apr 26', 'Apr 27', 'Apr 28', 'Apr 29', 'Apr 30'],
+  ph: [7.0, 7.3, 7.1, 7.4, 7.2],
+  tds: [310, 340, 330, 350, 320]
+};
+
+// LCD cycling state
+let lcdStep = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('theme-ready');
+  drawTrendCharts();
+  updateUI();
+
+  // 1-second telemetry loop
+  setInterval(() => {
+    // Subtle realistic sensor drift
+    state.ph = +(state.ph + (Math.random() - 0.5) * 0.04).toFixed(1);
+    if (state.ph < 6.8) state.ph = 6.8;
+    if (state.ph > 7.6) state.ph = 7.6;
+
+    state.tds = Math.round(state.tds + (Math.random() - 0.5) * 2);
+
+    // Pump filling or water depletion
+    if (state.pump) {
+      state.level = Math.min(100, state.level + 2);
+    } else {
+      if (Math.random() < 0.25 && state.level > 10) state.level -= 1;
+    }
+
+    // Auto pump threshold
+    if (state.autoMode) {
+      if (state.level < 30 && !state.pump) {
+        togglePump(true);
+        showToast("🌾 Auto-Irrigation: Tank level low (<30%). Pump Started!");
+      } else if (state.level >= 85 && state.pump) {
+        togglePump(false);
+        showToast("🌾 Auto-Irrigation: Tank full (85%). Pump Stopped.");
+      }
+    }
+
+    updateUI();
+  }, 1200);
+
+  // LCD screen cycling
+  setInterval(cycleLcd, 2500);
+});
+
+// Navigation Tab Switcher
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-tab') === tabId);
+  });
+  document.querySelectorAll('.tab-section').forEach(sec => {
+    sec.classList.remove('active');
+  });
+
+  const target = document.getElementById('tab-' + tabId);
+  if (target) {
+    target.classList.add('active');
+  }
+
+  if (tabId === 'dashboard') {
+    setTimeout(drawTrendCharts, 50);
+  }
+}
+
+function scrollToDashboard() {
+  switchTab('dashboard');
+  const el = document.getElementById('dashboardAnchor');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Update all UI elements according to state
+function updateUI() {
+  // 1. pH Card
+  const elPh = document.getElementById('valPh');
+  if (elPh) elPh.textContent = state.ph.toFixed(1);
+  const wqPh = document.getElementById('wqPh');
+  if (wqPh) wqPh.textContent = state.ph.toFixed(1);
+
+  // 2. TDS Card
+  const elTds = document.getElementById('valTds');
+  if (elTds) elTds.textContent = state.tds;
+  const wqTds = document.getElementById('wqTds');
+  if (wqTds) wqTds.textContent = state.tds;
+
+  // 3. Water Level Card
+  const elLevel = document.getElementById('valLevel');
+  if (elLevel) elLevel.textContent = state.level;
+
+  // 4. Donut Chart Progress Ring
+  const donutProgress = document.getElementById('donutProgress');
+  const donutPctText = document.getElementById('donutPercentText');
+  const tankLevelPctText = document.getElementById('tankLevelPctText');
+  const tankVolumeText = document.getElementById('tankVolumeText');
+  const canisterWater = document.getElementById('canisterWater');
+
+  if (donutProgress) {
+    donutProgress.setAttribute('stroke-dasharray', `${state.level}, 100`);
+  }
+  if (donutPctText) donutPctText.textContent = state.level + '%';
+  if (tankLevelPctText) tankLevelPctText.textContent = state.level + '%';
+  if (tankVolumeText) tankVolumeText.textContent = Math.round(state.level * 10) + 'L';
+  if (canisterWater) canisterWater.style.height = state.level + '%';
+
+  // 5. Pump & Relay Status
+  const relayDot = document.getElementById('relayDot');
+  const pumpStatusLabel = document.getElementById('pumpStatusLabel');
+  const irrigStatus = document.getElementById('valIrrigStatus');
+  const irrigAction = document.getElementById('valIrrigAction');
+
+  if (state.pump) {
+    if (relayDot) { relayDot.style.background = '#22c55e'; relayDot.style.boxShadow = '0 0 8px #22c55e'; }
+    if (pumpStatusLabel) pumpStatusLabel.textContent = 'Water Pump (Relay D8): RUNNING';
+    if (irrigStatus) irrigStatus.textContent = 'Irrigating';
+    if (irrigAction) { irrigAction.textContent = 'Active Irrigation in progress'; irrigAction.style.color = '#0284c7'; }
+  } else {
+    if (relayDot) { relayDot.style.background = '#64748b'; relayDot.style.boxShadow = 'none'; }
+    if (pumpStatusLabel) pumpStatusLabel.textContent = 'Water Pump (Relay D8): IDLE';
+    if (irrigStatus) irrigStatus.textContent = 'Monitor Soil';
+    if (irrigAction) { irrigAction.textContent = 'Check soil moisture'; irrigAction.style.color = '#15803d'; }
+  }
+}
+
+// Toggle Relay / Pump
+function togglePump(active) {
+  state.pump = active;
+  updateUI();
+  showToast(active ? "Relay Energized: 12V Water Pump STARTED" : "Relay De-energized: Water Pump STOPPED");
+}
+
+// Virtual 16x2 LCD Text Rotation
+function cycleLcd() {
+  const line1 = document.getElementById('lcdText1');
+  const line2 = document.getElementById('lcdText2');
+  if (!line1 || !line2) return;
+
+  switch (lcdStep) {
+    case 0:
+      line1.textContent = `pH:${state.ph.toFixed(1)}  DO:${state.doVal.toFixed(1)}`;
+      line2.textContent = `TDS:${state.tds} LVL:${state.level}%`;
+      break;
+    case 1:
+      line1.textContent = `PUMP: ${state.pump ? "[ACTIVE]" : "[IDLE]"}   `;
+      line2.textContent = `SYS: AUTO REFILL`;
+      break;
+    case 2:
+      line1.textContent = `KISAN MITRA AGRI`;
+      line2.textContent = `WATER SENSE v2.0`;
+      break;
+  }
+  lcdStep = (lcdStep + 1) % 3;
+}
+
+// Draw the exact trend lines from the user's reference photo
+function drawTrendCharts() {
+  // Chart 1: pH Trend
+  const cPh = document.getElementById('chartPh');
+  if (cPh) {
+    drawLineChart(cPh, trendData.dates, trendData.ph, 6.0, 8.5, '#0284c7', 'pH');
+  }
+
+  // Chart 2: TDS Trend
+  const cTds = document.getElementById('chartTds');
+  if (cTds) {
+    drawLineChart(cTds, trendData.dates, trendData.tds, 200, 450, '#475569', 'ppm');
+  }
+}
+
+function drawLineChart(canvas, labels, values, minY, maxY, strokeColor, unit) {
+  const ctx = canvas.getContext('2d');
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width;
+  const h = rect.height;
+  const padL = 36;
+  const padR = 14;
+  const padT = 16;
+  const padB = 26;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Horizontal Grid Lines
+  ctx.strokeStyle = state.isDark ? 'rgba(255,255,255,0.08)' : '#f1f5f9';
+  ctx.lineWidth = 1;
+  const steps = 3;
+  for (let i = 0; i <= steps; i++) {
+    const y = padT + (i / steps) * (h - padT - padB);
+    ctx.beginPath();
+    ctx.moveTo(padL, y);
+    ctx.lineTo(w - padR, y);
+    ctx.stroke();
+
+    // Axis label
+    const val = maxY - (i / steps) * (maxY - minY);
+    ctx.fillStyle = state.isDark ? '#64748b' : '#94a3b8';
+    ctx.font = '9px Segoe UI, sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(Math.round(val), padL - 6, y + 3);
+  }
+
+  // Plot line with dots
+  const len = values.length;
+  const chartW = w - padL - padR;
+  const chartH = h - padT - padB;
+
+  ctx.beginPath();
+  ctx.strokeStyle = strokeColor;
+  ctx.lineWidth = 2;
+
+  const points = [];
+  for (let i = 0; i < len; i++) {
+    const x = padL + (i / (len - 1)) * chartW;
+    const norm = (values[i] - minY) / (maxY - minY);
+    const y = padT + chartH - (norm * chartH);
+    points.push({ x, y });
+
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+
+  // Draw dots and X-axis date labels
+  ctx.fillStyle = strokeColor;
+  points.forEach((pt, i) => {
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, 3, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = state.isDark ? '#94a3b8' : '#64748b';
+    ctx.font = '9px Segoe UI, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(labels[i], pt.x, h - 8);
+    ctx.fillStyle = strokeColor;
+  });
+}
+
+// Dark / Light Theme Toggle
+function toggleTheme() {
+  state.isDark = !state.isDark;
+  document.body.classList.toggle('dark-theme', state.isDark);
+  const btn = document.getElementById('themeToggleBtn');
+  btn.textContent = state.isDark ? '☀️' : '🌙';
+  drawTrendCharts();
+}
+
+// Hindi / English Language Toggle
+function toggleLanguage(lang) {
+  state.lang = lang;
+  if (lang === 'hi') {
+    document.getElementById('heroTitle1').textContent = 'स्वच्छ जल।';
+    document.getElementById('heroTitle2').textContent = 'समृद्ध फसल।';
+    document.getElementById('heroSubtitle').textContent = 'किसान मित्र: पानी की गुणवत्ता जांचें और सटीक सिंचाई प्रबंधित करें।';
+    document.getElementById('heroBtnText').textContent = 'डैशबोर्ड देखें';
+    document.getElementById('secTitle').textContent = 'सेंसर रीडिंग';
+    document.getElementById('secSub').textContent = 'आर्डुइनो आधारित लाइव जल पैरामीटर';
+    document.getElementById('subPh').textContent = 'आदर्श सीमा: 6.5 ~ 8.5';
+    document.getElementById('subTds').textContent = 'आदर्श सीमा: 150 ~ 300 ppm';
+    document.getElementById('subLevel').textContent = 'टंकी जल स्तर';
+    document.getElementById('footerTagline').textContent = ' | सतत कृषि के लिए स्मार्ट जल प्रबंधन';
+    showToast("भाषा बदलकर हिंदी की गई।");
+  } else {
+    document.getElementById('heroTitle1').textContent = 'Smart Water.';
+    document.getElementById('heroTitle2').textContent = 'Healthy Crops.';
+    document.getElementById('heroSubtitle').textContent = 'Kisan Mitra helps farmers monitor water quality and manage irrigation efficiently.';
+    document.getElementById('heroBtnText').textContent = 'View Dashboard';
+    document.getElementById('secTitle').textContent = 'Sensor Readings';
+    document.getElementById('secSub').textContent = 'Current water parameters from Arduino monitoring system';
+    document.getElementById('subPh').textContent = 'Ideal range: 6.5 ~ 8.5';
+    document.getElementById('subTds').textContent = 'Ideal range: 150 ~ 300 ppm';
+    document.getElementById('subLevel').textContent = 'Tank level';
+    document.getElementById('footerTagline').textContent = ' | Smart Water Management for Sustainable Agriculture';
+    showToast("Language switched to English.");
+  }
+}
+
+// Web Serial API (Plug Real Arduino Uno into USB)
+async function handleUsbConnect() {
+  if (!("serial" in navigator)) {
+    alert("Web Serial is supported in Google Chrome, Microsoft Edge, and Opera.\nPlease open this page in Chrome or Edge to connect physical Arduino hardware.");
+    return;
+  }
+
+  try {
+    const port = await navigator.serial.requestPort();
+    await port.open({ baudRate: 115200 });
+    document.getElementById('btnUsbConnect').textContent = '🔌 Arduino Connected';
+    document.getElementById('btnUsbConnect').style.background = '#0284c7';
+    document.getElementById('deviceStatusText').textContent = 'Device reading: Arduino USB Connected';
+    showToast("✅ Arduino Uno Connected via USB Serial (115200 baud)!");
+
+    // Read incoming stream
+    const decoder = new TextDecoderStream();
+    port.readable.pipeTo(decoder.writable);
+    const reader = decoder.readable.getReader();
+    let buf = '';
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      if (value) {
+        buf += value;
+        const lines = buf.split('\n');
+        buf = lines.pop();
+        for (const line of lines) {
+          try {
+            const data = JSON.parse(line.trim());
+            if (data.ph) state.ph = parseFloat(data.ph);
+            if (data.tds) state.tds = parseInt(data.tds);
+            if (data.level) state.level = parseInt(data.level);
+            if (data.pump !== undefined) state.pump = Boolean(data.pump);
+            updateUI();
+          } catch (e) {}
+        }
+      }
+    }
+  } catch (err) {
+    showToast("Serial connection note: " + err.message);
+  }
+}
+
+function copyArduinoCode() {
+  const code = document.getElementById('arduinoCodeSnippet');
+  if (code) {
+    navigator.clipboard.writeText(code.innerText).then(() => {
+      showToast("📋 Arduino code copied to clipboard!");
+    });
+  }
+}
+
+function showToast(msg) {
+  const c = document.getElementById('toastContainer');
+  if (!c) return;
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<span>${msg}</span>`;
+  c.appendChild(t);
+  setTimeout(() => {
+    t.style.opacity = '0';
+    setTimeout(() => t.remove(), 300);
+  }, 3500);
+}
+  </script>
+</body>
+</html>
